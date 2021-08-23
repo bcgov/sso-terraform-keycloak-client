@@ -8,7 +8,7 @@ Terraform module which creates a Keycloak realm client with default values.
 
 ```hcl
 module "client_test-client" {
-  source              = "bcgov/keycloak/client"
+  source              = "github.com/bcgov/sso-terraform-keycloak-client?ref=dev"
   realm_id            = "onestopauth"
   client_name         = "test-client"
   valid_redirect_uris = [
@@ -16,6 +16,8 @@ module "client_test-client" {
   ]
 }
 ```
+
+- remove `?ref=dev` when referring `main` branch.
 
 ## Authors
 
