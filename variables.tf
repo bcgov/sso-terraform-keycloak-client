@@ -100,7 +100,7 @@ variable "pkce_code_challenge_method" {
 variable "full_scope_allowed" {
   description = "Whether or not to allow to include all roles mappings in the access token"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "access_token_lifespan" {
