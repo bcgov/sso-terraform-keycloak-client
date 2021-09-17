@@ -143,3 +143,16 @@ resource "keycloak_generic_client_protocol_mapper" "client_roles_mapper" {
     "multivalued" : "true"
   }
 }
+
+resource "keycloak_generic_client_protocol_mapper" "access_token_aud" {
+  realm_id        = var.realm_id
+  client_id       = keycloak_openid_client.this.id
+  name            = "access_token_aud"
+  protocol        = "openid-connect"
+  protocol_mapper = "oidc-audience-mapper"
+  config = {
+    "included.client.audience" : var.client_name,
+    "id.token.claim" : "false",
+    "access.token.claim" : "true",
+  }
+}
