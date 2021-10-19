@@ -19,7 +19,7 @@ variable "enabled" {
 
 variable "description" {
   description = "The description of the openid client of the realm"
-  default     = ""
+  default     = "Created without CSS app"
 }
 
 # CONFIDENTIAL - Used for server-side clients that require both client ID and secret when authenticating.
