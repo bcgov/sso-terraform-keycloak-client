@@ -151,6 +151,12 @@ variable "roles" {
   default     = []
 }
 
-# authentication_flow_binding_overrides and authorization is not covered in here
-# https://registry.terraform.io/providers/mrparkers/keycloak/latest/docs/resources/openid_client#authentication_flow_binding_overrides
-# https://registry.terraform.io/providers/mrparkers/keycloak/latest/docs/resources/openid_client#authorization
+variable "browser_authentication_flow" {
+  description = "Authentication browser flow id"
+  default     = ""
+}
+
+variable "direct_grant_authentication_flow" {
+  description = "Authentication direct grant flow id"
+  default     = ""
+}
