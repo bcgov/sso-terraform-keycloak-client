@@ -151,6 +151,12 @@ variable "roles" {
   default     = []
 }
 
+variable "override_authentication_flow" {
+  description = "Set to true when either of 'browser_authentication_flow' or 'direct_grant_authentication_flow' has value(s)"
+  type        = bool
+  default     = false
+}
+
 variable "browser_authentication_flow" {
   description = "Authentication browser flow id"
   default     = ""

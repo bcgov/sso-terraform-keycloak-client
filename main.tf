@@ -35,9 +35,12 @@ resource "keycloak_openid_client" "this" {
   consent_required                         = var.consent_required
   exclude_session_state_from_auth_response = var.exclude_session_state_from_auth_response
 
-  authentication_flow_binding_overrides {
-    browser_id      = var.browser_authentication_flow
-    direct_grant_id = var.direct_grant_authentication_flow
+  dynamic "authentication_flow_binding_overrides" {
+    for_each = toset(var.override_authentication_flow ? ["1"] : [])
+    content {
+      browser_id      = var.browser_authentication_flow
+      direct_grant_id = var.direct_grant_authentication_flow
+    }
   }
 }
 
