@@ -86,22 +86,6 @@ resource "keycloak_generic_client_protocol_mapper" "idir_userid_mapper" {
   }
 }
 
-resource "keycloak_generic_client_protocol_mapper" "idir_guid_mapper" {
-  realm_id        = var.realm_id
-  client_id       = keycloak_openid_client.this.id
-  name            = "idir_guid"
-  protocol        = "openid-connect"
-  protocol_mapper = "oidc-usermodel-attribute-mapper"
-  config = {
-    "user.attribute" : "idir_guid",
-    "claim.name" : "idir_guid",
-    "jsonType.label" : "String",
-    "id.token.claim" : "true",
-    "access.token.claim" : "true",
-    "userinfo.token.claim" : "true"
-  }
-}
-
 resource "keycloak_generic_client_protocol_mapper" "bceid_userid_mapper" {
   realm_id        = var.realm_id
   client_id       = keycloak_openid_client.this.id
