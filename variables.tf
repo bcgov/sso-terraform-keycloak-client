@@ -56,6 +56,10 @@ variable "direct_access_grants_enabled" {
   default     = false
 }
 
+# This feature is only available for confidential clients
+# 1. if access_type == CONFIDENTIAL => Valid
+# 2. if access_type == PUBLIC => Invalid; service accounts (client credentials flow) cannot be enabled on public clients
+# 3. if access_type == BEARER-ONLY => Invalid; Keycloak cannot issue tokens for bearer-only clients
 variable "service_accounts_enabled" {
   description = "When true, the OAuth2 Client Credentials grant will be enabled for this client"
   type        = bool

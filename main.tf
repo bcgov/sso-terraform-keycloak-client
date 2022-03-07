@@ -11,7 +11,7 @@ resource "keycloak_openid_client" "this" {
   standard_flow_enabled        = var.standard_flow_enabled
   implicit_flow_enabled        = var.implicit_flow_enabled
   direct_access_grants_enabled = var.direct_access_grants_enabled
-  service_accounts_enabled     = var.service_accounts_enabled
+  service_accounts_enabled     = var.access_type != "CONFIDENTIAL" ? false : var.service_accounts_enabled
 
   access_type   = var.access_type
   client_secret = var.client_secret
@@ -120,6 +120,22 @@ resource "keycloak_generic_client_protocol_mapper" "bceid_business_name_mapper" 
   config = {
     "user.attribute" : "bceid_business_name",
     "claim.name" : "bceid_business_name",
+    "jsonType.label" : "String",
+    "id.token.claim" : "true",
+    "access.token.claim" : "true",
+    "userinfo.token.claim" : "true"
+  }
+}
+
+resource "keycloak_generic_client_protocol_mapper" "display_name_mapper" {
+  realm_id        = var.realm_id
+  client_id       = keycloak_openid_client.this.id
+  name            = "display_name"
+  protocol        = "openid-connect"
+  protocol_mapper = "oidc-usermodel-attribute-mapper"
+  config = {
+    "user.attribute" : "displayName",
+    "claim.name" : "display_name",
     "jsonType.label" : "String",
     "id.token.claim" : "true",
     "access.token.claim" : "true",
