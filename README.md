@@ -19,6 +19,10 @@ module "client_test-client" {
 
 - remove `?ref=dev` when referring `main` branch.
 
+## Bugs
+
+- `pkce_code_challenge_method` value is not confirmed with the Keycloak server; it only relies on the value of the TF state.
+
 ## Authors
 
 Module is maintained by [SSO Team](https://github.com/orgs/bcgov/teams/sso-ops).
