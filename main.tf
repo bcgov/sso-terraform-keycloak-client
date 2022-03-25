@@ -44,7 +44,7 @@ resource "keycloak_openid_client" "this" {
   }
 }
 
-# see https://mrparkers.github.io/terraform-provider-keycloak/resources/keycloak_user_roles
+# see https://registry.terraform.io/providers/mrparkers/keycloak/latest/docs/resources/role
 resource "keycloak_role" "client_role" {
   for_each = { for v in var.roles : v => v }
 
@@ -52,6 +52,13 @@ resource "keycloak_role" "client_role" {
   client_id   = keycloak_openid_client.this.id
   name        = each.value
   description = each.value
+}
+
+resource "keycloak_openid_client_default_scopes" "idp_scopes" {
+  realm_id  = var.realm_id
+  client_id = keycloak_openid_client.this.id
+
+  default_scopes = concat(["profile", "email"], var.idps)
 }
 
 resource "keycloak_generic_client_protocol_mapper" "identity_provider_mapper" {

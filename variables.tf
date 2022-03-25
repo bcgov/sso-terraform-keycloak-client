@@ -155,6 +155,12 @@ variable "roles" {
   default     = []
 }
 
+variable "idps" {
+  description = "Identity Providers; assign each as a client scope"
+  type        = list(string)
+  default     = []
+}
+
 variable "override_authentication_flow" {
   description = "Set to true when either of 'browser_authentication_flow' or 'direct_grant_authentication_flow' has value(s)"
   type        = bool
