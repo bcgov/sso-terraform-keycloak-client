@@ -155,6 +155,12 @@ variable "roles" {
   default     = []
 }
 
+variable "idps" {
+  description = "Identity Providers; assign each as a client scope"
+  type        = list(string)
+  default     = []
+}
+
 # authentication_flow_binding_overrides and authorization is not covered in here
 # https://registry.terraform.io/providers/mrparkers/keycloak/latest/docs/resources/openid_client#authentication_flow_binding_overrides
 # https://registry.terraform.io/providers/mrparkers/keycloak/latest/docs/resources/openid_client#authorization
