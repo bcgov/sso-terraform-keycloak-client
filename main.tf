@@ -34,6 +34,14 @@ resource "keycloak_openid_client" "this" {
 
   consent_required                         = var.consent_required
   exclude_session_state_from_auth_response = var.exclude_session_state_from_auth_response
+
+  dynamic "authentication_flow_binding_overrides" {
+    for_each = toset(var.override_authentication_flow ? ["1"] : [])
+    content {
+      browser_id      = var.browser_authentication_flow
+      direct_grant_id = var.direct_grant_authentication_flow
+    }
+  }
 }
 
 # see https://registry.terraform.io/providers/mrparkers/keycloak/latest/docs/resources/role
@@ -78,6 +86,22 @@ resource "keycloak_generic_client_protocol_mapper" "idir_userid_mapper" {
   config = {
     "user.attribute" : "idir_userid",
     "claim.name" : "idir_userid",
+    "jsonType.label" : "String",
+    "id.token.claim" : "true",
+    "access.token.claim" : "true",
+    "userinfo.token.claim" : "true"
+  }
+}
+
+resource "keycloak_generic_client_protocol_mapper" "idir_guid_mapper" {
+  realm_id        = var.realm_id
+  client_id       = keycloak_openid_client.this.id
+  name            = "idir_guid"
+  protocol        = "openid-connect"
+  protocol_mapper = "oidc-usermodel-attribute-mapper"
+  config = {
+    "user.attribute" : "idir_guid",
+    "claim.name" : "idir_guid",
     "jsonType.label" : "String",
     "id.token.claim" : "true",
     "access.token.claim" : "true",

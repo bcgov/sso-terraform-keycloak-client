@@ -161,6 +161,18 @@ variable "idps" {
   default     = []
 }
 
-# authentication_flow_binding_overrides and authorization is not covered in here
-# https://registry.terraform.io/providers/mrparkers/keycloak/latest/docs/resources/openid_client#authentication_flow_binding_overrides
-# https://registry.terraform.io/providers/mrparkers/keycloak/latest/docs/resources/openid_client#authorization
+variable "override_authentication_flow" {
+  description = "Set to true when either of 'browser_authentication_flow' or 'direct_grant_authentication_flow' has value(s)"
+  type        = bool
+  default     = false
+}
+
+variable "browser_authentication_flow" {
+  description = "Authentication browser flow id"
+  default     = ""
+}
+
+variable "direct_grant_authentication_flow" {
+  description = "Authentication direct grant flow id"
+  default     = ""
+}
