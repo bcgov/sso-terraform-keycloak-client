@@ -1,5 +1,7 @@
 # SSO Terraform Keycloak Client
 
+![Lifecycle:Stable](https://img.shields.io/badge/Lifecycle-Stable-97ca00)
+
 Terraform module which creates a Keycloak realm client with default values.
 
 - see https://registry.terraform.io/providers/mrparkers/keycloak/latest/docs/resources/openid_client
